@@ -34,5 +34,5 @@ jobs:
               --title "Merge $BRANCH_NAME into homolog" \
               --body "Automated PR created on push to branch \`$BRANCH_NAME\`."
           else
-            echo "PR #${EXISTING_PR} already exists for$BRANCH_NAME -> homolog."
+            echo "PR #${EXISTING_PR} already exists for $BRANCH_NAME -> homolog."
           fi
