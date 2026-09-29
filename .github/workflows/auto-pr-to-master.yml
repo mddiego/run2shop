@@ -1,0 +1,37 @@
+name: Auto create PR homolog to master
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - homolog
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  create-pr-to-master:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check and create PR from homolog to master
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if an open PR already exists from homolog targeting master
+          EXISTING_PR=$(gh pr list --head homolog --base master --state open --json number --jq '.[0].number')
+
+          if [ -z "$EXISTING_PR" ]; then
+            echo "No open PR found from homolog to master. Creating PR..."
+            gh pr create \
+              --base master \
+              --head homolog \
+              --title "Release: Merge homolog into master" \
+              --body "Automated PR created after merging PR #${{ github.event.pull_request.number }} into \`homolog\`."
+          else
+            echo "PR #${EXISTING_PR} already exists from homolog to master."
+          fi
