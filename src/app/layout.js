@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
+      <GoogleAnalytics gaId="G-8SVG1P9XQ7" />
       <meta
         name="google-site-verification"
         content="yuAsSN0BuK4XllkcZ0CvA1ADTQz7H45ooYY3a_JNVt8"
