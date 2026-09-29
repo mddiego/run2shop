@@ -2,18 +2,6 @@ import Image from "next/image";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-function GTag() {
-  return `
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SVG1P9XQ7"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-8SVG1P9XQ7');
-    </script>`;
-}
 export default function Home() {
   return (
     <>
@@ -82,7 +70,6 @@ export default function Home() {
       </div>
       <Analytics />
       <SpeedInsights />
-      <GTag />
     </>
   );
 }
